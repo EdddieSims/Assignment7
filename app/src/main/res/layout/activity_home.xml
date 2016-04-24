@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/homeView">
+
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Driver Standings"
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:textAlignment="center"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:text="Add Car"
+        android:id="@+id/btnGoToCars"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD DRIVER"
+        android:id="@+id/btnGoToDriver"
+        android:layout_below="@+id/btnGoToCars"
+        android:layout_alignRight="@+id/btnGoToCars"
+        android:layout_alignEnd="@+id/btnGoToCars"
+        android:layout_alignLeft="@+id/btnGoToCars"
+        android:layout_alignStart="@+id/btnGoToCars" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD ENGINE"
+        android:id="@+id/btnGoToEngine"
+        android:layout_below="@+id/btnGoToDriver"
+        android:layout_alignLeft="@+id/btnGoToDriver"
+        android:layout_alignStart="@+id/btnGoToDriver"
+        android:layout_alignRight="@+id/btnGoToDriver"
+        android:layout_alignEnd="@+id/btnGoToDriver" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD LEADERBOARD"
+        android:id="@+id/btnGoToLeader"
+        android:layout_below="@+id/btnGoToEngine"
+        android:layout_alignRight="@+id/btnGoToEngine"
+        android:layout_alignEnd="@+id/btnGoToEngine"
+        android:layout_alignLeft="@+id/btnGoToEngine"
+        android:layout_alignStart="@+id/btnGoToEngine" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD SPONSOR"
+        android:id="@+id/btnGoToSponsor"
+        android:layout_below="@+id/btnGoToLeader"
+        android:layout_alignRight="@+id/btnGoToLeader"
+        android:layout_alignEnd="@+id/btnGoToLeader"
+        android:layout_alignLeft="@+id/btnGoToEngine"
+        android:layout_alignStart="@+id/btnGoToEngine" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD STANDINGS"
+        android:id="@+id/btnGoToStandings"
+        android:layout_below="@+id/btnGoToSponsor"
+        android:layout_alignRight="@+id/btnGoToSponsor"
+        android:layout_alignEnd="@+id/btnGoToSponsor"
+        android:layout_alignLeft="@+id/btnGoToEngine"
+        android:layout_alignStart="@+id/btnGoToEngine" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD TEAMMATE"
+        android:id="@+id/btnGoToTeamMate"
+        android:layout_below="@+id/btnGoToStandings"
+        android:layout_alignRight="@+id/btnGoToStandings"
+        android:layout_alignEnd="@+id/btnGoToStandings"
+        android:layout_alignLeft="@+id/btnGoToEngine"
+        android:layout_alignStart="@+id/btnGoToEngine" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD TRACK"
+        android:id="@+id/btnGoToTrack"
+        android:layout_below="@+id/btnGoToTeamMate"
+        android:layout_alignRight="@+id/btnGoToTeamMate"
+        android:layout_alignEnd="@+id/btnGoToTeamMate"
+        android:layout_alignLeft="@+id/btnGoToEngine"
+        android:layout_alignStart="@+id/btnGoToEngine" />
+
+</RelativeLayout>
