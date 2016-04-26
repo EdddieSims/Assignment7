@@ -17,6 +17,8 @@ public class LeaderboardRepositoryTest extends AndroidTestCase
 {
     private LeaderboardRepositoryImpl leaderboardImpl;
     Leaderboard leaderboard;
+    Leaderboard returnLeaderboard;
+    Leaderboard updateLeaderboard;
     @Override
     public void setUp() throws Exception
     {
@@ -28,6 +30,42 @@ public class LeaderboardRepositoryTest extends AndroidTestCase
     public void testObject() throws Exception
     {
         Assert.assertNotNull(leaderboardImpl);
+    }
+
+    @Test
+    public void testCreate() throws Exception
+    {
+        leaderboardImpl.save(leaderboard);
+        //Assert.assertNotNull(carImpl);
+    }
+
+    @Test
+    public void testRead() throws Exception
+    {
+        returnLeaderboard = leaderboardImpl.findById(1L);
+        String name = returnLeaderboard.getName();
+        System.out.println(name);
+    }
+
+    @Test
+    public void testUpdate() throws Exception
+    {
+        updateLeaderboard = new Leaderboard.Builder(leaderboard.getName())
+                .surname("Rosburg")
+                .fastestLapTime(1.20)
+                .currLapTime(1.11)
+                .totalRaceTime(3.35)
+                .totalLaps(10)
+                .currLap(3)
+                .lapsRemaining(7)
+                .build();
+        leaderboardImpl.update(updateLeaderboard);
+    }
+
+    @Test
+    public void testDelete() throws Exception
+    {
+        leaderboardImpl.delete(leaderboard);
     }
 
     @After

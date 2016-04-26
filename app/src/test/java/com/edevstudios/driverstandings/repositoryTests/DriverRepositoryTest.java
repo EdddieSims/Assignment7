@@ -9,6 +9,7 @@ import com.edevstudios.driverstandings.repository.domain.Impl.DriverRepositoryIm
 import junit.framework.Assert;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -20,8 +21,11 @@ public class DriverRepositoryTest extends AndroidTestCase
 {
     private DriverRepositoryImpl driverImpl;
     Driver driver;
+    Driver updateDriver;
+    Driver returnDriver;
     HashMap<String, String> raceDriver;
-    @Override
+
+    @Before
     public void setUp() throws Exception
     {
         raceDriver = new HashMap<String, String>();
@@ -35,9 +39,38 @@ public class DriverRepositoryTest extends AndroidTestCase
     }
 
     @Test
-    public void testObject() throws Exception
+    public void testCreate() throws Exception
     {
-        Assert.assertNotNull(driverImpl);
+        driverImpl.save(driver);
+        //Assert.assertNotNull(carImpl);
+    }
+
+    @Test
+    public void testRead() throws Exception
+    {
+        returnDriver = driverImpl.findById(1L);
+        String name = returnDriver.getName();
+        System.out.println(name);
+    }
+
+    @Test
+    public void testUpdate() throws Exception
+    {
+        updateDriver = new Driver.Builder(driver.getName())
+                .surname("Rosburg")
+                .country(raceDriver.get("country"))
+                .team(raceDriver.get("team"))
+                .points(25)
+                .behind(0)
+                .numOfWins(1)
+                .build();
+        driverImpl.update(updateDriver);
+    }
+
+    @Test
+    public void testDelete() throws Exception
+    {
+        driverImpl.delete(driver);
     }
 
     @After

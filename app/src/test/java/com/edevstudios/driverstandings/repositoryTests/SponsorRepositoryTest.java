@@ -16,7 +16,10 @@ import org.junit.Test;
 public class SponsorRepositoryTest extends AndroidTestCase
 {
     private SponsorRepositoryImpl sponsorImpl;
+
     Sponsor petronas;
+    Sponsor returnSponsor;
+    Sponsor updateSponsor;
     @Override
     public void setUp() throws Exception
     {
@@ -28,6 +31,36 @@ public class SponsorRepositoryTest extends AndroidTestCase
     public void testObject() throws Exception
     {
         Assert.assertNotNull(sponsorImpl);
+    }
+
+    @Test
+    public void testCreate() throws Exception
+    {
+        sponsorImpl.save(petronas);
+        //Assert.assertNotNull(carImpl);
+    }
+
+    @Test
+    public void testRead() throws Exception
+    {
+        returnSponsor = sponsorImpl.findById(1L);
+        String name = returnSponsor.getName();
+        System.out.println(name);
+    }
+
+    @Test
+    public void testUpdate() throws Exception
+    {
+        updateSponsor = new Sponsor.Builder(petronas.getName())
+                .logoColour("Aqua Blue")
+                .build();
+        sponsorImpl.update(updateSponsor);
+    }
+
+    @Test
+    public void testDelete() throws Exception
+    {
+        sponsorImpl.delete(petronas);
     }
 
     @After

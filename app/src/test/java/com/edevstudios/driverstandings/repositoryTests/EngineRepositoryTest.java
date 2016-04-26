@@ -8,6 +8,7 @@ import com.edevstudios.driverstandings.repository.domain.Impl.EngineRepositoryIm
 
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -17,8 +18,10 @@ public class EngineRepositoryTest extends AndroidTestCase
 {
     private EngineRepositoryImpl engineImpl;
     Engine engine;
+    Engine updateEngine;
+    Engine returnEngine;
 
-    @Override
+    @Before
     public void setUp() throws Exception
     {
         engineImpl = new EngineRepositoryImpl(mContext);
@@ -29,6 +32,37 @@ public class EngineRepositoryTest extends AndroidTestCase
     public void testObject() throws Exception
     {
         Assert.assertNotNull(engineImpl);
+    }
+
+    @Test
+    public void testCreate() throws Exception
+    {
+        engineImpl.save(engine);
+        //Assert.assertNotNull(carImpl);
+    }
+
+    @Test
+    public void testRead() throws Exception
+    {
+        returnEngine = engineImpl.findById(1L);
+        String make = returnEngine.getBrand();
+        System.out.println(make);
+    }
+
+    @Test
+    public void testUpdate() throws Exception
+    {
+        updateEngine = new Engine.Builder(returnEngine.getBrand())
+                .model("AMG-6/6")
+                .numOfPistons(6)
+                .powerOutput(1.6).build();
+        engineImpl.update(updateEngine);
+    }
+
+    @Test
+    public void testDelete() throws Exception
+    {
+        engineImpl.delete(engine);
     }
 
     @After

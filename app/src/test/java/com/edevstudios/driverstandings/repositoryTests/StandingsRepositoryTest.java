@@ -19,6 +19,8 @@ public class StandingsRepositoryTest extends AndroidTestCase
 {
     private StandingsRepositoryImpl standingsImpl;
     Standings firstRace;
+    Standings updateStandings;
+    Standings returnStandings;
     HashMap<String, String> values;
 
     @Override
@@ -37,6 +39,40 @@ public class StandingsRepositoryTest extends AndroidTestCase
     public void testObject() throws Exception
     {
         Assert.assertNotNull(standingsImpl);
+    }
+
+    @Test
+    public void testCreate() throws Exception
+    {
+        standingsImpl.save(firstRace);
+        //Assert.assertNotNull(carImpl);
+    }
+
+    @Test
+    public void testRead() throws Exception
+    {
+        returnStandings = standingsImpl.findById(1L);
+        String name = returnStandings.getName();
+        System.out.println(name);
+    }
+
+    @Test
+    public void testUpdate() throws Exception
+    {
+        updateStandings = new Standings.Builder(firstRace.getName())
+                .surname(values.get("surname"))
+                .team(values.get("team"))
+                .points(50)
+                .behind(0)
+                .numOfWins(2)
+                .build();
+        standingsImpl.update(updateStandings);
+    }
+
+    @Test
+    public void testDelete() throws Exception
+    {
+        standingsImpl.delete(firstRace);
     }
 
     @After

@@ -19,6 +19,8 @@ public class TeamMateRepositoryTest extends AndroidTestCase
 {
     private TeamMateRepositoryImpl teamMateImpl;
     TeamMate teamMate;
+    TeamMate returnTeamMAte;
+    TeamMate updateTeamMAte;
     HashMap<String, String> raceDriver;
 
     @Override
@@ -40,6 +42,40 @@ public class TeamMateRepositoryTest extends AndroidTestCase
         Assert.assertNotNull(teamMateImpl);
     }
 
+    @Test
+    public void testCreate() throws Exception
+    {
+        teamMateImpl.save(teamMate);
+        //Assert.assertNotNull(carImpl);
+    }
+
+    @Test
+    public void testRead() throws Exception
+    {
+        returnTeamMAte = teamMateImpl.findById(1L);
+        String name = returnTeamMAte.getName();
+        System.out.println(name);
+    }
+
+    @Test
+    public void testUpdate() throws Exception
+    {
+        updateTeamMAte = new TeamMate.Builder(teamMate.getName())
+                .surname("Hamilton")
+                .country(raceDriver.get(raceDriver.get("country")))
+                .team(raceDriver.get(raceDriver.get("team")))
+                .points(36)
+                .behind(14)
+                .numOfWins(0)
+                .build();
+        teamMateImpl.update(updateTeamMAte);
+    }
+
+    @Test
+    public void testDelete() throws Exception
+    {
+        teamMateImpl.delete(teamMate);
+    }
     @After
     public void tearDown() throws Exception
     {
