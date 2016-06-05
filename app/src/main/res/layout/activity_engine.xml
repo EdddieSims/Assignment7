@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Engines"
+        android:id="@+id/textView11"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Brand"
+        android:id="@+id/textView12"
+        android:layout_below="@+id/textView11"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="35dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Model"
+        android:id="@+id/textView13"
+        android:layout_below="@+id/textView12"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Num of Pistons"
+        android:id="@+id/textView14"
+        android:layout_below="@+id/textView13"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="35dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Power Output"
+        android:id="@+id/textView15"
+        android:layout_below="@+id/textView14"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="35dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtEngineBrand"
+        android:layout_above="@+id/textView13"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/textView11"
+        android:layout_alignStart="@+id/textView11"
+        android:layout_marginRight="20dp"
+        android:inputType="textCapSentences"
+        android:singleLine="true"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtEnginePower"
+        android:layout_alignBottom="@+id/textView15"
+        android:layout_alignLeft="@+id/txtEngineBrand"
+        android:layout_alignStart="@+id/txtEngineBrand"
+        android:layout_alignRight="@+id/txtEngineBrand"
+        android:layout_alignEnd="@+id/txtEngineBrand"
+        android:inputType="numberDecimal"
+        android:singleLine="true"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtEnginePistons"
+        android:layout_alignBottom="@+id/textView14"
+        android:layout_alignLeft="@+id/txtEnginePower"
+        android:layout_alignStart="@+id/txtEnginePower"
+        android:layout_alignRight="@+id/txtEnginePower"
+        android:layout_alignEnd="@+id/txtEnginePower"
+        android:inputType="number"
+        android:singleLine="true"
+        android:layout_marginLeft="15dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtEngineModel"
+        android:layout_above="@+id/textView14"
+        android:layout_alignLeft="@+id/txtEngineBrand"
+        android:layout_alignStart="@+id/txtEngineBrand"
+        android:layout_alignRight="@+id/txtEngineBrand"
+        android:layout_alignEnd="@+id/txtEngineBrand"
+        android:inputType="textCapSentences"
+        android:singleLine="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add new Engine"
+        android:id="@+id/btnAddEngine"
+        android:layout_below="@+id/textView15"
+        android:layout_marginTop="35dp"
+        android:layout_alignRight="@+id/btnAllEngines"
+        android:layout_alignEnd="@+id/btnAllEngines"
+        android:layout_alignLeft="@+id/btnAllEngines"
+        android:layout_alignStart="@+id/btnAllEngines"
+        android:onClick="clickAddEngine" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View All Engines"
+        android:id="@+id/btnAllEngines"
+        android:layout_below="@+id/btnAddEngine"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:onClick="clickViewEngines" />
+</RelativeLayout>

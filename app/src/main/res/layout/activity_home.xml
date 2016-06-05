@@ -25,7 +25,8 @@
         android:text="Add Car"
         android:id="@+id/btnGoToCars"
         android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="clickCar" />
 
     <Button
         android:layout_width="wrap_content"
@@ -36,7 +37,8 @@
         android:layout_alignRight="@+id/btnGoToCars"
         android:layout_alignEnd="@+id/btnGoToCars"
         android:layout_alignLeft="@+id/btnGoToCars"
-        android:layout_alignStart="@+id/btnGoToCars" />
+        android:layout_alignStart="@+id/btnGoToCars"
+        android:onClick="clickDriver" />
 
     <Button
         android:layout_width="wrap_content"
@@ -47,61 +49,64 @@
         android:layout_alignLeft="@+id/btnGoToDriver"
         android:layout_alignStart="@+id/btnGoToDriver"
         android:layout_alignRight="@+id/btnGoToDriver"
-        android:layout_alignEnd="@+id/btnGoToDriver" />
+        android:layout_alignEnd="@+id/btnGoToDriver"
+        android:onClick="clickEngine" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ADD LEADERBOARD"
         android:id="@+id/btnGoToLeader"
-        android:layout_below="@+id/btnGoToEngine"
-        android:layout_alignRight="@+id/btnGoToEngine"
-        android:layout_alignEnd="@+id/btnGoToEngine"
-        android:layout_alignLeft="@+id/btnGoToEngine"
-        android:layout_alignStart="@+id/btnGoToEngine" />
+        android:onClick="clickLeaderboard"
+        android:layout_below="@+id/btnGoToRaces"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ADD SPONSOR"
         android:id="@+id/btnGoToSponsor"
+        android:onClick="clickSponsor"
         android:layout_below="@+id/btnGoToLeader"
         android:layout_alignRight="@+id/btnGoToLeader"
         android:layout_alignEnd="@+id/btnGoToLeader"
-        android:layout_alignLeft="@+id/btnGoToEngine"
-        android:layout_alignStart="@+id/btnGoToEngine" />
+        android:layout_alignLeft="@+id/btnGoToLeader"
+        android:layout_alignStart="@+id/btnGoToLeader" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ADD STANDINGS"
         android:id="@+id/btnGoToStandings"
+        android:onClick="clickStandings"
         android:layout_below="@+id/btnGoToSponsor"
         android:layout_alignRight="@+id/btnGoToSponsor"
         android:layout_alignEnd="@+id/btnGoToSponsor"
-        android:layout_alignLeft="@+id/btnGoToEngine"
-        android:layout_alignStart="@+id/btnGoToEngine" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ADD TEAMMATE"
-        android:id="@+id/btnGoToTeamMate"
-        android:layout_below="@+id/btnGoToStandings"
-        android:layout_alignRight="@+id/btnGoToStandings"
-        android:layout_alignEnd="@+id/btnGoToStandings"
-        android:layout_alignLeft="@+id/btnGoToEngine"
-        android:layout_alignStart="@+id/btnGoToEngine" />
+        android:layout_alignLeft="@+id/btnGoToSponsor"
+        android:layout_alignStart="@+id/btnGoToSponsor" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ADD TRACK"
         android:id="@+id/btnGoToTrack"
-        android:layout_below="@+id/btnGoToTeamMate"
-        android:layout_alignRight="@+id/btnGoToTeamMate"
-        android:layout_alignEnd="@+id/btnGoToTeamMate"
+        android:onClick="clickTrack"
+        android:layout_below="@+id/btnGoToStandings"
+        android:layout_alignRight="@+id/btnGoToStandings"
+        android:layout_alignEnd="@+id/btnGoToStandings"
+        android:layout_alignLeft="@+id/btnGoToStandings"
+        android:layout_alignStart="@+id/btnGoToStandings" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Races"
+        android:id="@+id/btnGoToRaces"
+        android:layout_below="@+id/btnGoToEngine"
         android:layout_alignLeft="@+id/btnGoToEngine"
-        android:layout_alignStart="@+id/btnGoToEngine" />
+        android:layout_alignStart="@+id/btnGoToEngine"
+        android:layout_alignRight="@+id/btnGoToEngine"
+        android:layout_alignEnd="@+id/btnGoToEngine"
+        android:onClick="clickRaces" />
 
 </RelativeLayout>

@@ -2,10 +2,7 @@ package com.edevstudios.driverstandings;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +16,13 @@ import com.edevstudios.driverstandings.repository.domain.Impl.CarRepositoryImpl;
 public class Home extends AppCompatActivity
 {
     private Button btnGoToCars;
+    private Button btnGoToDrivers;
+    private Button btnGoToEngine;
+    private Button btnGoToRaces;
+    private Button btnGoToLeader;
+    private Button btnGoToSponsor;
+    private Button btnGoToStandings;
+    private Button btnGoToTrack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -53,31 +57,61 @@ public class Home extends AppCompatActivity
 
     public void createButtons()
     {
-        btnGoToCars = (Button)findViewById(R.id.btnGoToCars);
-
-        btnGoToCars.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                newCar(v);
-            }
-        });
+        btnGoToCars         = (Button)findViewById(R.id.btnGoToCars);
+        btnGoToDrivers      = (Button)findViewById(R.id.btnGoToDriver);
+        btnGoToEngine       = (Button)findViewById(R.id.btnGoToEngine);
+        btnGoToRaces        = (Button)findViewById(R.id.btnGoToRaces);
+        btnGoToLeader       = (Button)findViewById(R.id.btnGoToLeader);
+        btnGoToSponsor      = (Button)findViewById(R.id.btnGoToSponsor);
+        btnGoToStandings    = (Button)findViewById(R.id.btnGoToStandings);
+        btnGoToTrack        = (Button)findViewById(R.id.btnGoToTrack);
     }
 
-    public void newCar(View view)
+    public void clickCar(View view)
     {
-        CarRepositoryImpl carImple = new CarRepositoryImpl(this);
-        String make = "Mercedes Benz";
-        String model = "Indie";
-        int year = 2014;
+        Intent i = new Intent(view.getContext(), CarActivity.class);
+        startActivity(i);
+    }
 
-        Car formulaOneCar = CarFactory.createCar(make, model, year);
-        carImple.save(formulaOneCar);
-        Long id = 1L;
-        Car returnCar = carImple.findById(id);
+    public void clickDriver(View view)
+    {
+        Intent i = new Intent(view.getContext(), DriverActivity.class);
+        startActivity(i);
+    }
 
-        String carMake = returnCar.getMake();
-        Toast.makeText(Home.this, carMake, Toast.LENGTH_LONG).show();
+    public void clickEngine(View view)
+    {
+        Intent i = new Intent(view.getContext(), EngineActivity.class);
+        startActivity(i);
+    }
+
+    public void clickRaces(View view)
+    {
+        Intent i = new Intent(view.getContext(), RacesActivity.class);
+        startActivity(i);
+    }
+
+    public void clickLeaderboard(View view)
+    {
+        Intent i = new Intent(view.getContext(), LeaderboardActivity.class);
+        startActivity(i);
+    }
+
+    public void clickSponsor(View view)
+    {
+        Intent i = new Intent(view.getContext(), SponsorActivity.class);
+        startActivity(i);
+    }
+
+    public void clickStandings(View view)
+    {
+        Intent i = new Intent(view.getContext(), StandingsActivity.class);
+        startActivity(i);
+    }
+
+    public void clickTrack(View view)
+    {
+        Intent i = new Intent(view.getContext(), TrackActivity.class);
+        startActivity(i);
     }
 }

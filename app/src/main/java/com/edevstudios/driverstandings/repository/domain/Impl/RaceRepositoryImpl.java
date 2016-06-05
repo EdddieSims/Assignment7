@@ -9,34 +9,34 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.edevstudios.driverstandings.config.database.DBConstant;
-import com.edevstudios.driverstandings.domain.Car;
-import com.edevstudios.driverstandings.repository.domain.CarRepository;
+import com.edevstudios.driverstandings.domain.Race;
+import com.edevstudios.driverstandings.repository.domain.RaceRepository;
 
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by Edmund.Simons on 2016/04/21.
+ * Created by Edmund.Simons on 2016/06/04.
  */
-public class CarRepositoryImpl extends SQLiteOpenHelper implements CarRepository
+public class RaceRepositoryImpl extends SQLiteOpenHelper implements RaceRepository
 {
     private SQLiteDatabase db;
-    public static final String TABLE_NAME       = "car";
+    public static final String TABLE_NAME       = "season_races";
 
     public static final String COLUMN_ID        = "id";
-    public static final String COLUMN_MAKE      = "make";
-    public static final String COLUMN_MODEL     = "model";
-    public static final String COLUMN_YEAR      = "year";
+    public static final String COLUMN_TRACK     = "track";
+    public static final String COLUMN_LAPS      = "laps";
+    public static final String COLUMN_WINNER_ID = "winner_id";
 
     // This string creates the database when called
     private static final String DATABASE_CREATE = " CREATE TABLE "
-            + TABLE_NAME    + "("
-            + COLUMN_ID     + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + COLUMN_MAKE   + " TEXT NOT NULL , "
-            + COLUMN_MODEL  + " TEXT NOT NULL , "
-            + COLUMN_YEAR   + " INTEGER NOT NULL  );";
+            + TABLE_NAME        + "("
+            + COLUMN_ID         + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + COLUMN_TRACK      + " TEXT NOT NULL , "
+            + COLUMN_LAPS       + " INTEGER NOT NULL , "
+            + COLUMN_WINNER_ID  + " INTEGER NOT NULL );";
 
-    public CarRepositoryImpl(Context context)
+    public RaceRepositoryImpl(Context context)
     {
         super(context, DBConstant.DATABASE_NAME, null, DBConstant.DATABASE_VERSION);
     }
@@ -52,7 +52,6 @@ public class CarRepositoryImpl extends SQLiteOpenHelper implements CarRepository
         this.close();
     }
 
-    //Overriding the onCreate method to call the database create statement
     @Override
     public void onCreate(SQLiteDatabase db)
     {
@@ -69,18 +68,16 @@ public class CarRepositoryImpl extends SQLiteOpenHelper implements CarRepository
         onCreate(db);
     }
 
-    //Finds individual record based on id
     @Override
-    public Car findById(Long id)
-    {
+    public Race findById(Long id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
                 TABLE_NAME,
                 new String[]{
                         COLUMN_ID,
-                        COLUMN_MAKE,
-                        COLUMN_MODEL,
-                        COLUMN_YEAR},
+                        COLUMN_TRACK,
+                        COLUMN_LAPS,
+                        COLUMN_WINNER_ID},
                 COLUMN_ID + " =? ",
                 new String[]{String.valueOf(id)},
                 null,
@@ -90,13 +87,13 @@ public class CarRepositoryImpl extends SQLiteOpenHelper implements CarRepository
 
         if (cursor.moveToFirst())
         {
-            final Car car = new Car.Builder(cursor.getString(cursor.getColumnIndex(COLUMN_MAKE)))
+            final Race race = new Race.Builder(cursor.getString(cursor.getColumnIndex(COLUMN_TRACK)))
                     .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
-                    .model(cursor.getString(cursor.getColumnIndex(COLUMN_MODEL)))
-                    .year(cursor.getInt(cursor.getColumnIndex(COLUMN_YEAR)))
+                    .laps(cursor.getInt(cursor.getColumnIndex(COLUMN_LAPS)))
+                    .winnerId(cursor.getLong(cursor.getColumnIndex(COLUMN_WINNER_ID)))
                     .build();
 
-            return car;
+            return race;
         }
         else
         {
@@ -104,34 +101,32 @@ public class CarRepositoryImpl extends SQLiteOpenHelper implements CarRepository
         }
     }
 
-    //Saves newly inserted data to the database
     @Override
-    public Car save(Car entity)
+    public Race save(Race entity)
     {
         open();
         ContentValues values = new ContentValues();
         values.put(COLUMN_ID, entity.getId());
-        values.put(COLUMN_MAKE, entity.getMake());
-        values.put(COLUMN_MODEL, entity.getModel());
-        values.put(COLUMN_YEAR, entity.getYear());
+        values.put(COLUMN_TRACK, entity.getTrackName());
+        values.put(COLUMN_LAPS, entity.getLaps());
+        values.put(COLUMN_WINNER_ID, entity.getWinnerId());
         long id = db.insertOrThrow(TABLE_NAME, null, values);
-        Car insertedCar = new Car.Builder(entity.getMake())
+        Race insertedRace = new Race.Builder(entity.getTrackName())
                 .copy(entity)
                 .id(new Long(id))
                 .build();
-        return insertedCar;
+        return insertedRace;
     }
 
-    //Updates a record in the database
     @Override
-    public Car update(Car entity)
+    public Race update(Race entity)
     {
         open();
         ContentValues values = new ContentValues();
         values.put(COLUMN_ID, entity.getId());
-        values.put(COLUMN_MAKE, entity.getMake());
-        values.put(COLUMN_MODEL, entity.getModel());
-        values.put(COLUMN_YEAR, entity.getYear());
+        values.put(COLUMN_TRACK, entity.getTrackName());
+        values.put(COLUMN_LAPS, entity.getLaps());
+        values.put(COLUMN_WINNER_ID, entity.getWinnerId());
         db.update(
                 TABLE_NAME,
                 values,
@@ -141,10 +136,8 @@ public class CarRepositoryImpl extends SQLiteOpenHelper implements CarRepository
         return entity;
     }
 
-    //Deletes a record from the database
     @Override
-    public Car delete(Car entity)
-    {
+    public Race delete(Race entity) {
         open();
         db.delete(
                 TABLE_NAME,
@@ -153,28 +146,25 @@ public class CarRepositoryImpl extends SQLiteOpenHelper implements CarRepository
         return entity;
     }
 
-    //Selects all records in the database
     @Override
-    public Set<Car> findAll()
-    {
+    public Set<Race> findAll() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Set<Car> cars = new HashSet<>();
+        Set<Race> races = new HashSet<>();
         open();
         Cursor cursor = db.query(TABLE_NAME, null,null,null,null,null,null);
         if (cursor.moveToFirst()) {
             do {
-                final Car car = new Car.Builder(cursor.getString(cursor.getColumnIndex(COLUMN_MAKE)))
+                final Race race = new Race.Builder(cursor.getString(cursor.getColumnIndex(COLUMN_TRACK)))
                         .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
-                        .model(cursor.getString(cursor.getColumnIndex(COLUMN_MODEL)))
-                        .year(cursor.getInt(cursor.getColumnIndex(COLUMN_YEAR)))
+                        .laps(cursor.getInt(cursor.getColumnIndex(COLUMN_LAPS)))
+                        .winnerId(cursor.getLong(cursor.getColumnIndex(COLUMN_WINNER_ID)))
                         .build();
-                cars.add(car);
+                races.add(race);
             } while (cursor.moveToNext());
         }
-        return cars;
+        return races;
     }
 
-    //Deletes all records from the database
     @Override
     public int deleteAll()
     {
@@ -183,6 +173,4 @@ public class CarRepositoryImpl extends SQLiteOpenHelper implements CarRepository
         close();
         return rowsDeleted;
     }
-
-
 }

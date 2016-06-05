@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layRel">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Add Cars"
+        android:id="@+id/textView2"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Make"
+        android:id="@+id/textView3"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="46dp"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="350px"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtCarMake"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_alignLeft="@+id/btnAdCarToDB"
+        android:layout_alignStart="@+id/btnAdCarToDB"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="20dp"
+        android:inputType="textCapSentences"
+        android:singleLine="true"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtCarModel"
+        android:layout_alignBottom="@+id/textView5"
+        android:layout_alignLeft="@+id/btnAdCarToDB"
+        android:layout_alignStart="@+id/btnAdCarToDB"
+        android:layout_alignRight="@+id/txtCarMake"
+        android:layout_alignEnd="@+id/txtCarMake"
+        android:inputType="textCapSentences"
+        android:singleLine="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Year"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/textView5"
+        android:layout_alignLeft="@+id/textView5"
+        android:layout_alignStart="@+id/textView5"
+        android:layout_marginTop="35dp" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:id="@+id/spinCarYear"
+        android:layout_alignRight="@+id/txtCarModel"
+        android:layout_alignEnd="@+id/txtCarModel"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_alignLeft="@+id/txtCarMake"
+        android:layout_alignStart="@+id/txtCarMake" />
+
+    <Button
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:text="Add new Car"
+        android:id="@+id/btnAdCarToDB"
+        android:layout_below="@+id/textView4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:onClick="addCar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Model"
+        android:id="@+id/textView5"
+        android:layout_below="@+id/textView3"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_marginTop="35dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View all Cars"
+        android:id="@+id/btnDisplayCars"
+        android:layout_below="@+id/btnAdCarToDB"
+        android:layout_marginTop="20dp"
+        android:layout_alignRight="@+id/btnAdCarToDB"
+        android:layout_alignEnd="@+id/btnAdCarToDB"
+        android:layout_alignLeft="@+id/btnAdCarToDB"
+        android:layout_alignStart="@+id/btnAdCarToDB"
+        android:onClick="showAll" />
+</RelativeLayout>
