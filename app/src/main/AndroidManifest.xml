@@ -24,6 +24,8 @@
         </activity>
         <activity android:name=".AllDriverActivity">
         </activity>
+        <activity android:name=".DriverUpdateActivity">
+        </activity>
         <activity android:name=".EngineActivity">
         </activity>
         <activity android:name=".AllEnginesActivity">

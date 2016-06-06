@@ -1,7 +1,11 @@
 package com.edevstudios.driverstandings;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -9,9 +13,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.edevstudios.driverstandings.conf.factory.DriverFactory;
+import com.edevstudios.driverstandings.conf.factory.util.App;
 import com.edevstudios.driverstandings.domain.Driver;
 import com.edevstudios.driverstandings.repository.domain.Impl.DriverRepositoryImpl;
+import com.edevstudios.driverstandings.services.Impl.DriverServiceImpl;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 
 /**
@@ -19,6 +26,9 @@ import java.util.HashMap;
  */
 public class DriverActivity extends AppCompatActivity
 {
+    private DriverServiceImpl driverServiceImpl;
+    private boolean isBound = false;
+
     private EditText txtDriverName;
     private EditText txtDriverSurname;
     private EditText txtDriverCountry;
@@ -26,6 +36,7 @@ public class DriverActivity extends AppCompatActivity
 
     private Button btnAddDriver;
     private Button btnViewDrivers;
+    private Button btnGoToUpdateDriver;
 
     Driver driver;
     HashMap<String, String> raceDriver;
@@ -36,8 +47,28 @@ public class DriverActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver);
 
+        Intent intent = new Intent(this, DriverServiceImpl.class);
+        App.context = this.getApplicationContext();
+        driverServiceImpl = DriverServiceImpl.getInstance();
+        bindService(intent, connection, Context.BIND_AUTO_CREATE);
+
         initialiseWidgets();
     }
+
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            DriverServiceImpl.DriverServiceLocalBinder binder
+                    = (DriverServiceImpl.DriverServiceLocalBinder)service;
+            driverServiceImpl = binder.getService();
+            isBound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            isBound = false;
+        }
+    };
 
     public void clickAddDriver(View view)
     {
@@ -61,9 +92,13 @@ public class DriverActivity extends AppCompatActivity
             raceDriver.put("team",team);
 
             driver = DriverFactory.createDriver(raceDriver, 0, 0, 0);
+            //Driver newEntity = driverServiceImpl.save(driver);
 
-            driverImpl.save(driver);
-            Toast.makeText(this,  "Successfully added", Toast.LENGTH_LONG).show();
+            //Driver createDriver = DriverFactory.createDriver(raceDriver, 0, 0, 0);
+            Driver newEntity = driverServiceImpl.save(driver);
+            //driverImpl.save(driver);
+
+            Toast.makeText(this, newEntity.getName() + " Successfully added", Toast.LENGTH_LONG).show();
 
             txtDriverName.setText("");
             txtDriverSurname.setText("");
@@ -78,14 +113,20 @@ public class DriverActivity extends AppCompatActivity
         startActivity(i);
     }
 
+    public void clickUpdateDriver(View view)
+    {
+        Intent i = new Intent(view.getContext(), DriverUpdateActivity.class);
+        startActivity(i);
+    }
+
     public void initialiseWidgets()
     {
         txtDriverName = (EditText) findViewById(R.id.txtDriverName);
-        txtDriverSurname = (EditText)findViewById(R.id.txtDriverSurname);
-        txtDriverCountry = (EditText)findViewById(R.id.txtDriverCountry);
-        txtDriverTeam = (EditText)findViewById(R.id.txtDriverTeam);
+        txtDriverSurname = (EditText)findViewById(R.id.txtUpdateDriverSurname);
+        txtDriverCountry = (EditText)findViewById(R.id.txtUpdateDriverCountry);
+        txtDriverTeam = (EditText)findViewById(R.id.txtUpdateDriverTeam);
 
-        btnAddDriver = (Button)findViewById(R.id.btnAddDriver);
+        btnAddDriver = (Button)findViewById(R.id.btnUpdateAddDriver);
         btnViewDrivers = (Button)findViewById(R.id.btnViewDrivers);
     }
 }
