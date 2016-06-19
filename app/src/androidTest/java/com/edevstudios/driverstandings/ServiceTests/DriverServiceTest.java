@@ -41,11 +41,6 @@ public class DriverServiceTest extends AndroidTestCase
         App.context = this.getContext();
         driverServiceImpl = DriverServiceImpl.getInstance();
         App.getAppContext().bindService(intent, connection, Context.BIND_AUTO_CREATE);
-
-        //Intent intent = new Intent(this.getContext(), AnimalServiceImpl.class);
-        //App.context = this.getContext();
-        //myService = AnimalServiceImpl.getInstance();
-        //GlobalContext.getAppContext().bindService(intent, connection, Context.BIND_AUTO_CREATE);
     }
 
     private ServiceConnection connection = new ServiceConnection() {
