@@ -2,7 +2,6 @@ package com.edevstudios.driverstandings.services;
 
 import com.edevstudios.driverstandings.domain.Car;
 
-import java.util.List;
 import java.util.Set;
 
 /**

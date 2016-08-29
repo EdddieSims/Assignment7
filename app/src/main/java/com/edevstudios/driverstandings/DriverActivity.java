@@ -16,7 +16,6 @@ import com.edevstudios.driverstandings.conf.factory.DriverFactory;
 import com.edevstudios.driverstandings.conf.factory.util.App;
 import com.edevstudios.driverstandings.domain.Driver;
 import com.edevstudios.driverstandings.repository.domain.Impl.DriverRepositoryImpl;
-import com.edevstudios.driverstandings.services.DriverService;
 import com.edevstudios.driverstandings.services.Impl.DriverServiceImpl;
 
 import java.math.BigDecimal;
@@ -27,7 +26,7 @@ import java.util.HashMap;
  */
 public class DriverActivity extends AppCompatActivity
 {
-    //private DriverServiceImpl driverServiceImpl;
+    private DriverServiceImpl driverServiceImpl;
     private boolean isBound = false;
 
     private EditText txtDriverName;
@@ -50,17 +49,15 @@ public class DriverActivity extends AppCompatActivity
 
         Intent intent = new Intent(this, DriverServiceImpl.class);
         App.context = this.getApplicationContext();
-        //driverServiceImpl = DriverServiceImpl.getInstance();
-        //bindService(intent, connection, Context.BIND_AUTO_CREATE);
+        driverServiceImpl = DriverServiceImpl.getInstance();
+        bindService(intent, connection, Context.BIND_AUTO_CREATE);
 
         initialiseWidgets();
     }
 
-    /*private ServiceConnection connection = new ServiceConnection()
-    {
+    private ServiceConnection connection = new ServiceConnection() {
         @Override
-        public void onServiceConnected(ComponentName name, IBinder service)
-        {
+        public void onServiceConnected(ComponentName name, IBinder service) {
             DriverServiceImpl.DriverServiceLocalBinder binder
                     = (DriverServiceImpl.DriverServiceLocalBinder)service;
             driverServiceImpl = binder.getService();
@@ -68,13 +65,10 @@ public class DriverActivity extends AppCompatActivity
         }
 
         @Override
-        public void onServiceDisconnected(ComponentName name)
-        {
+        public void onServiceDisconnected(ComponentName name) {
             isBound = false;
         }
-    };*/
-
-
+    };
 
     public void clickAddDriver(View view)
     {
@@ -101,20 +95,10 @@ public class DriverActivity extends AppCompatActivity
             //Driver newEntity = driverServiceImpl.save(driver);
 
             //Driver createDriver = DriverFactory.createDriver(raceDriver, 0, 0, 0);
-            //Driver newEntity = driverServiceImpl.save(driver);
+            Driver newEntity = driverServiceImpl.save(driver);
             //driverImpl.save(driver);
-            Thread driverThread = new Thread(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    DriverService dService = new DriverServiceImpl();
-                    dService.save(driver);
-                }
-            });
 
-            driverThread.start();
-            Toast.makeText(this, "Successfully added", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, newEntity.getName() + " Successfully added", Toast.LENGTH_LONG).show();
 
             txtDriverName.setText("");
             txtDriverSurname.setText("");
