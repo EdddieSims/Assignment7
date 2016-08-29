@@ -44,6 +44,7 @@ public class AllCarsActivity extends AppCompatActivity
             //Toast.makeText(this, car.getId().toString(), Toast.LENGTH_LONG).show();
             aListOfCars.add(car.getMake());
         }
+
         //Toast.makeText(this, "", Toast.LENGTH_LONG).show();
         ArrayAdapter<String> dbCars = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, aListOfCars);
         allCars.setAdapter(dbCars);

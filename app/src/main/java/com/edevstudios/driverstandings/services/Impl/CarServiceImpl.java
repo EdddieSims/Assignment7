@@ -8,10 +8,13 @@ import android.support.annotation.Nullable;
 
 import com.edevstudios.driverstandings.conf.factory.util.App;
 import com.edevstudios.driverstandings.domain.Car;
+import com.edevstudios.driverstandings.repositories.RestAPI;
+import com.edevstudios.driverstandings.repositories.rest.RestCarAPI;
 import com.edevstudios.driverstandings.repository.domain.CarRepository;
 import com.edevstudios.driverstandings.repository.domain.Impl.CarRepositoryImpl;
 import com.edevstudios.driverstandings.services.CarService;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -42,6 +45,8 @@ public class CarServiceImpl extends Service implements CarService
         }
     }
 
+    final RestAPI<Car, Long> rest = new RestCarAPI();
+
 
     @Override
     public Car findById(Long id) {
@@ -50,7 +55,7 @@ public class CarServiceImpl extends Service implements CarService
 
     @Override
     public Set<Car> findAll() {
-        return carRepository.findAll();
+        return rest.findAll();
     }
 
     @Override

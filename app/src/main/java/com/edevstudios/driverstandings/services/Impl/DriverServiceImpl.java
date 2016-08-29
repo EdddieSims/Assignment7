@@ -8,6 +8,9 @@ import android.support.annotation.Nullable;
 
 import com.edevstudios.driverstandings.conf.factory.util.App;
 import com.edevstudios.driverstandings.domain.Driver;
+import com.edevstudios.driverstandings.repositories.RestAPI;
+import com.edevstudios.driverstandings.repositories.rest.RestCarAPI;
+import com.edevstudios.driverstandings.repositories.rest.RestDriverAPI;
 import com.edevstudios.driverstandings.repository.domain.DriverRepository;
 import com.edevstudios.driverstandings.repository.domain.Impl.DriverRepositoryImpl;
 import com.edevstudios.driverstandings.services.DriverService;
@@ -42,20 +45,21 @@ public class DriverServiceImpl extends Service implements DriverService
         }
     }
 
+    final RestAPI<Driver, Long> rest = new RestDriverAPI();
 
     @Override
     public Driver findById(Long id) {
-        return driverRepository.findById(id);
+        return rest.findById(id);
     }
 
     @Override
     public Set<Driver> findAll() {
-        return driverRepository.findAll();
+        return rest.findAll();
     }
 
     @Override
     public Driver save(Driver entity) {
-        return driverRepository.save(entity);
+        return rest.save(entity);
     }
 
     @Override
