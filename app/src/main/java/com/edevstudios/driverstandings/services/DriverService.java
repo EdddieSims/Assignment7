@@ -13,7 +13,7 @@ public interface DriverService
 
     Set<Driver> findAll();
 
-    Driver save(Driver entity);
+    String save(Driver entity);
 
     Driver update(Driver entity);
 

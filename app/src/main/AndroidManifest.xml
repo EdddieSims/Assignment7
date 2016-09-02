@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.edevstudios.driverstandings">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/app_logo"
@@ -42,6 +44,6 @@
         </activity>
         <activity android:name=".AllTracksActivity">
         </activity>
-        <srevice android:name = ".ActivateIntentService"/>
+        <service android:name = ".services.Impl.ActivateIntentService"/>
     </application>
 </manifest>

@@ -8,6 +8,7 @@ import android.widget.ListView;
 import com.edevstudios.driverstandings.domain.Car;
 import com.edevstudios.driverstandings.domain.Driver;
 import com.edevstudios.driverstandings.repository.domain.Impl.DriverRepositoryImpl;
+import com.edevstudios.driverstandings.services.Impl.DriverServiceImpl;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -38,14 +39,32 @@ public class AllDriverActivity extends AppCompatActivity
 
         aListOfDrivers = new ArrayList<>();
         listOfDrivers = new HashSet<>();
-        listOfDrivers = driverImpl.findAll();
 
-        for(Driver driver: listOfDrivers)
-        {
-            //Toast.makeText(this, car.getId().toString(), Toast.LENGTH_LONG).show();
-            aListOfDrivers.add(driver.getName());
+        Thread allDriverThread = new Thread(new Runnable() {
+            @Override
+            public void run()
+            {
+                DriverServiceImpl service = new DriverServiceImpl();
+                listOfDrivers = service.findAll();
+
+                for(Driver driver: listOfDrivers)
+                {
+                    //Toast.makeText(this, car.getId().toString(), Toast.LENGTH_LONG).show();
+                    aListOfDrivers.add(driver.getName());
+                }
+                //Toast.makeText(this, "", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        allDriverThread.start();
+
+        try {
+
+            allDriverThread.join();
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
         }
-        //Toast.makeText(this, "", Toast.LENGTH_LONG).show();
         ArrayAdapter<String> dbDrivers = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, aListOfDrivers);
         listAllDrivers.setAdapter(dbDrivers);
     }

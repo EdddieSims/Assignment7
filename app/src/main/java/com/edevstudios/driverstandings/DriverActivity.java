@@ -16,6 +16,7 @@ import com.edevstudios.driverstandings.conf.factory.DriverFactory;
 import com.edevstudios.driverstandings.conf.factory.util.App;
 import com.edevstudios.driverstandings.domain.Driver;
 import com.edevstudios.driverstandings.repository.domain.Impl.DriverRepositoryImpl;
+import com.edevstudios.driverstandings.services.DriverService;
 import com.edevstudios.driverstandings.services.Impl.DriverServiceImpl;
 
 import java.math.BigDecimal;
@@ -94,11 +95,26 @@ public class DriverActivity extends AppCompatActivity
             driver = DriverFactory.createDriver(raceDriver, 0, 0, 0);
             //Driver newEntity = driverServiceImpl.save(driver);
 
-            //Driver createDriver = DriverFactory.createDriver(raceDriver, 0, 0, 0);
-            Driver newEntity = driverServiceImpl.save(driver);
-            //driverImpl.save(driver);
+            Thread driverThread = new Thread(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    DriverService service = new DriverServiceImpl();
+                    service.save(driver);
+                }
+            });
 
-            Toast.makeText(this, newEntity.getName() + " Successfully added", Toast.LENGTH_LONG).show();
+            driverThread.start();
+            try
+            {
+                driverThread.join();
+            } catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+
+            //Toast.makeText(this, newEntity.getName() + " Successfully added", Toast.LENGTH_LONG).show();
 
             txtDriverName.setText("");
             txtDriverSurname.setText("");
